@@ -24,7 +24,16 @@ public class MyTreeListAdapter extends BaseTreeViewAdapter<MyData> {
         TreeLevelIndicator indicator = (TreeLevelIndicator)rootView.findViewById(R.id.indicator);
         TextView textView = (TextView)rootView.findViewById(R.id.tv);
 
-        indicator.setUp(level, hasChildren, isExpanded, isExpanded, isExpanded);
+        MyData nextVisibleId = getManager().getNextVisible(t);
+
+        boolean showBottom = false;
+        if(nextVisibleId != null) {
+            showBottom = getManager().getLevel(nextVisibleId) != 0;
+        }
+
+        boolean showTop = getManager().getLevel(t) != 0;
+
+        indicator.setUp(level, hasChildren, isExpanded, showTop, showBottom);
         textView.setText("MyData num = " + t.num);
         return null;
     }
@@ -50,8 +59,4 @@ public class MyTreeListAdapter extends BaseTreeViewAdapter<MyData> {
         return position;
     }
 
-    @Override
-    public boolean hasStableIds() {
-        return true;
-    }
 }

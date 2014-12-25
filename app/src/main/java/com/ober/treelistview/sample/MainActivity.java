@@ -21,7 +21,6 @@ public class MainActivity extends ActionBarActivity {
 
     private TreeStateManager<MyData> treeStateManager;
 
-
     MyData myData1 = new MyData(1f);
     MyData myData2 = new MyData(1.1f);
     MyData myData3 = new MyData(1.2f);

@@ -6,8 +6,7 @@ package com.ober.treelistview.lib;
 public class NodeAlreadyInTreeException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
-    public NodeAlreadyInTreeException(String tree, String node)
-    {
+    public NodeAlreadyInTreeException(String tree, String node) {
         super("The node has already been added to the tree: " + tree + ". Old node is:" + node);
     }
 }
