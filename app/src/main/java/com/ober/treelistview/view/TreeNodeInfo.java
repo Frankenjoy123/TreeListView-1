@@ -10,8 +10,7 @@ public class TreeNodeInfo<T> {
     private final int level;
     private final boolean visible;
 
-    public TreeNodeInfo(T id, int level, boolean hasChildren, boolean visible, boolean expanded)
-    {
+    public TreeNodeInfo(T id, int level, boolean hasChildren, boolean visible, boolean expanded) {
         this.id = id;
         this.level = level;
         this.hasChildren = hasChildren;

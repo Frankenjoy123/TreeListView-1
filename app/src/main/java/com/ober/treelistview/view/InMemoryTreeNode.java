@@ -24,7 +24,7 @@ class InMemoryTreeNode<T> implements Serializable {
         this.visible = visible;
     }
 
-    public InMemoryTreeNode<T> add(int index, T newId, boolean visible) {
+    public synchronized InMemoryTreeNode<T> add(int index, T newId, boolean visible) {
         this.childIdListCache = null;
         T parentId = getId();
         int newLevel = 1 + getLevel();
@@ -36,12 +36,12 @@ class InMemoryTreeNode<T> implements Serializable {
         return newNode;
     }
 
-    public void clearChildren() {
+    public synchronized void clearChildren() {
         this.children.clear();
         this.childIdListCache = null;
     }
 
-    public List<T> getChildIdList() {
+    public synchronized List<T> getChildIdList() {
         if (this.childIdListCache == null) {
             this.childIdListCache = new LinkedList<>();
             for (InMemoryTreeNode<T> child : this.children) {
@@ -51,11 +51,11 @@ class InMemoryTreeNode<T> implements Serializable {
         return this.childIdListCache;
     }
 
-    public List<InMemoryTreeNode<T>> getChildren() {
+    public synchronized List<InMemoryTreeNode<T>> getChildren() {
         return this.children;
     }
 
-    public int getChildrenListSize() {
+    public synchronized int getChildrenListSize() {
         return this.children.size();
     }
 
@@ -71,15 +71,15 @@ class InMemoryTreeNode<T> implements Serializable {
         return this.parent;
     }
 
-    public int indexOf(T paramT) {
+    public synchronized int indexOf(T paramT) {
         return getChildIdList().indexOf(paramT);
     }
 
-    public boolean isVisible() {
+    public synchronized boolean isVisible() {
         return this.visible;
     }
 
-    public void removeChild(T id) {
+    public synchronized void removeChild(T id) {
         int i = indexOf(id);
         if (i != -1) {
             this.children.remove(i);
@@ -87,10 +87,11 @@ class InMemoryTreeNode<T> implements Serializable {
         }
     }
 
-    public void setVisible(boolean visible) {
+    public synchronized void setVisible(boolean visible) {
         this.visible = visible;
     }
 
+    @Override
     public String toString() {
         return "InMemoryTreeNode [id="
                 + getId() + ", parent="

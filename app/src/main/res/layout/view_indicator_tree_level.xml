@@ -6,7 +6,7 @@
 
     <View
         android:id="@+id/lineTop"
-        android:layout_width="@dimen/treeViewIndicatorLineWidth"
+        android:layout_width="2dp"
         android:layout_height="fill_parent"
         android:layout_above="@+id/imageToggle"
         android:layout_alignParentTop="true"
@@ -15,7 +15,7 @@
 
     <View
         android:id="@+id/lineBottom"
-        android:layout_width="@dimen/treeViewIndicatorLineWidth"
+        android:layout_width="2dp"
         android:layout_height="fill_parent"
         android:layout_alignParentBottom="true"
         android:layout_below="@id/imageToggle"

@@ -26,6 +26,7 @@ public abstract class BaseTreeViewAdapter<T> extends BaseAdapter
         this.numberOfLevels = level;
     }
 
+    @Override
     public boolean areAllItemsEnabled() {
         return true;
     }
@@ -95,6 +96,7 @@ public abstract class BaseTreeViewAdapter<T> extends BaseAdapter
         return root;
     }
 
+    @Override
     public int getViewTypeCount() {
         return this.numberOfLevels;
     }
@@ -117,14 +119,17 @@ public abstract class BaseTreeViewAdapter<T> extends BaseAdapter
 
     }
 
+    @Override
     public boolean hasStableIds() {
         return true;
     }
 
+    @Override
     public boolean isEmpty() {
         return getCount() == 0;
     }
 
+    @Override
     public boolean isEnabled(int paramInt) {
         return true;
     }
@@ -137,16 +142,18 @@ public abstract class BaseTreeViewAdapter<T> extends BaseAdapter
         this.treeStateManager.refresh();
     }
 
-    public void registerDataSetObserver(DataSetObserver paramDataSetObserver) {
-        this.treeStateManager.registerDataSetObserver(paramDataSetObserver);
+    @Override
+    public void registerDataSetObserver(DataSetObserver observer) {
+        this.treeStateManager.registerDataSetObserver(observer);
     }
 
     public void setDelegate(BaseTreeViewAdapterDelegate delegate) {
         this.delegate = delegate;
     }
 
-    public void unregisterDataSetObserver(DataSetObserver paramDataSetObserver) {
-        this.treeStateManager.unregisterDataSetObserver(paramDataSetObserver);
+    @Override
+    public void unregisterDataSetObserver(DataSetObserver observer) {
+        this.treeStateManager.unregisterDataSetObserver(observer);
     }
 
     public static abstract class BaseTreeViewAdapterDelegate {

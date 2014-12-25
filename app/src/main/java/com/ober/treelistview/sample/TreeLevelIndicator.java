@@ -12,9 +12,9 @@ import com.ober.treelistview.R;
  * Created by zlo on 2014/12/23.
  */
 public class TreeLevelIndicator extends RelativeLayout {
-    protected ImageView imageToggle;
-    protected View lineTop;
-    protected View lineBottom;
+    private ImageView imageToggle;
+    private View lineTop;
+    private View lineBottom;
 
     public TreeLevelIndicator(Context context) {
         this(context, null);
@@ -31,7 +31,6 @@ public class TreeLevelIndicator extends RelativeLayout {
     }
 
     private void init() {
-
         imageToggle = (ImageView) findViewById(R.id.imageToggle);
         lineTop = findViewById(R.id.lineTop);
         lineBottom = findViewById(R.id.lineBottom);
@@ -39,7 +38,6 @@ public class TreeLevelIndicator extends RelativeLayout {
 
     public void setUp(int level, boolean hasChild, boolean expanded,
                       boolean showTop, boolean showBottom) {
-
         int image = hasChild ? expanded ?
                 R.drawable.tree_level_indicator_expanded :
                 R.drawable.tree_level_indicator_collapsed :

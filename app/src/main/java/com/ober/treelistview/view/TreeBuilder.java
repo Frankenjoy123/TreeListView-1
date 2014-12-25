@@ -13,7 +13,7 @@ public class TreeBuilder<T> {
         this.manager = manager;
     }
 
-    private void addNodeToParentOneLevelDown(T parent, T id, int level) {
+    private synchronized void  addNodeToParentOneLevelDown(T parent, T id, int level) {
         if ((parent == null) && (level != 0)) {
             throw new TreeConfigurationException
                     ("Trying to add new id " + id + " to top level with level != 0 (" + level + ")");
@@ -30,28 +30,28 @@ public class TreeBuilder<T> {
         setLastAdded(id, level);
     }
 
-    private T findParentAtLevel(T id, int level) {
+    private synchronized T findParentAtLevel(T id, int level) {
         for (T parent = this.manager.getParent(id); ; parent = this.manager.getParent(parent))
             if ((parent == null) || (this.manager.getLevel(parent) == level))
                 return parent;
     }
 
-    private void setLastAdded(T paramT, int paramInt) {
+    private synchronized void setLastAdded(T paramT, int paramInt) {
         this.lastAddedId = paramT;
         this.lastLevel = paramInt;
     }
 
-    public void addRelation(T parent, T id) {
+    public synchronized void addRelation(T parent, T id) {
         this.manager.addAfterChild(parent, id, null);
         this.lastAddedId = id;
         this.lastLevel = this.manager.getLevel(id);
     }
 
-    public void clear() {
+    public synchronized void clear() {
         this.manager.clear();
     }
 
-    public void sequentiallyAddNextNode(T id, int level) {
+    public synchronized void sequentiallyAddNextNode(T id, int level) {
 
         if (this.lastAddedId == null) {
             addNodeToParentOneLevelDown(null, id, level);
@@ -62,6 +62,5 @@ public class TreeBuilder<T> {
         } else {
             addNodeToParentOneLevelDown(this.lastAddedId, id, level);
         }
-
     }
 }

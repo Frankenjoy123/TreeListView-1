@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 /**
@@ -38,20 +37,17 @@ public class TreeViewList extends ListView {
         });
     }
 
-    @Override
-    public void setAdapter(ListAdapter adapter) {
+    public void setAdapter(BaseTreeViewAdapter<?> adapter) {
+
         if (adapter == null) {
             super.setAdapter(null);
             return;
         }
 
-        if (!(adapter instanceof BaseTreeViewAdapter)) {
-            throw new TreeConfigurationException("The adapter is not of TreeViewAdapter type");
-        }
-
-        this.treeAdapter = ((BaseTreeViewAdapter) adapter);
+        this.treeAdapter = adapter;
         syncAdapter();
-        super.setAdapter(this.treeAdapter);
+
+        super.setAdapter(adapter);
 
     }
 }

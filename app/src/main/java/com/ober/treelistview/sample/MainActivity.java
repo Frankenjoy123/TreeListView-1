@@ -1,21 +1,57 @@
 package com.ober.treelistview.sample;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.ober.treelistview.R;
+import com.ober.treelistview.sample.data.MyData;
+import com.ober.treelistview.view.InMemoryTreeStateManager;
+import com.ober.treelistview.view.TreeBuilder;
+import com.ober.treelistview.view.TreeStateManager;
+import com.ober.treelistview.view.TreeViewList;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    private TreeViewList mTreeList;
+
+    private MyTreeListAdapter mAdapter;
+
+    private TreeStateManager<MyData> treeStateManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mTreeList = (TreeViewList) findViewById(R.id.treeViewList);
+
+        treeStateManager = new InMemoryTreeStateManager<>();
+
+        treeStateManager.clear();
+        initTree();
+
+        mAdapter = new MyTreeListAdapter(this, treeStateManager, 5);
+
+        mTreeList.setAdapter(mAdapter);
+
     }
 
+    private void initTree() {
+
+        TreeBuilder<MyData> treeBuilder = new TreeBuilder<>(treeStateManager);
+
+        MyData myData1 = new MyData(0);
+        MyData myData2 = new MyData(1);
+        MyData myData3 = new MyData(2);
+
+        treeBuilder.sequentiallyAddNextNode(myData1, 0);
+        treeBuilder.sequentiallyAddNextNode(myData2, 1);
+        treeBuilder.sequentiallyAddNextNode(myData3, 1);
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
