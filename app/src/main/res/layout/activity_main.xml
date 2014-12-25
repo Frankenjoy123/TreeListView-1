@@ -3,14 +3,16 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@android:color/darker_gray"
+    tools:context=".MainActivity">
 
     <TextView android:text="@string/hello_world"
         android:id="@+id/hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.ober.treelistview.view.TreeViewList
+    <com.ober.treelistview.lib.TreeViewList
         android:id="@+id/treeViewList"
         android:layout_below="@id/hello"
         android:layout_width="match_parent"

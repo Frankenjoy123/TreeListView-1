@@ -7,10 +7,10 @@ import android.view.MenuItem;
 
 import com.ober.treelistview.R;
 import com.ober.treelistview.sample.data.MyData;
-import com.ober.treelistview.view.InMemoryTreeStateManager;
-import com.ober.treelistview.view.TreeBuilder;
-import com.ober.treelistview.view.TreeStateManager;
-import com.ober.treelistview.view.TreeViewList;
+import com.ober.treelistview.lib.InMemoryTreeStateManager;
+import com.ober.treelistview.lib.TreeBuilder;
+import com.ober.treelistview.lib.TreeStateManager;
+import com.ober.treelistview.lib.TreeViewList;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -20,6 +20,17 @@ public class MainActivity extends ActionBarActivity {
     private MyTreeListAdapter mAdapter;
 
     private TreeStateManager<MyData> treeStateManager;
+
+
+    MyData myData1 = new MyData(1f);
+    MyData myData2 = new MyData(1.1f);
+    MyData myData3 = new MyData(1.2f);
+    MyData myData4 = new MyData(2f);
+    MyData myData5 = new MyData(2.1f);
+    MyData myData6 = new MyData(2.2f);
+    MyData myData7 = new MyData(2.21f);
+
+    MyData myData8 = new MyData(2.11f);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,20 +48,22 @@ public class MainActivity extends ActionBarActivity {
 
         mTreeList.setAdapter(mAdapter);
 
+        treeStateManager.addAfterChild(myData5, myData8, null);
     }
 
     private void initTree() {
-
         TreeBuilder<MyData> treeBuilder = new TreeBuilder<>(treeStateManager);
-
-        MyData myData1 = new MyData(0);
-        MyData myData2 = new MyData(1);
-        MyData myData3 = new MyData(2);
 
         treeBuilder.sequentiallyAddNextNode(myData1, 0);
         treeBuilder.sequentiallyAddNextNode(myData2, 1);
         treeBuilder.sequentiallyAddNextNode(myData3, 1);
+        treeBuilder.sequentiallyAddNextNode(myData4, 0);
+        treeBuilder.sequentiallyAddNextNode(myData5, 1);
+        treeBuilder.sequentiallyAddNextNode(myData6, 1);
+        treeBuilder.sequentiallyAddNextNode(myData7, 2);
 
+        treeStateManager.collapseChildren(myData1);
+        treeStateManager.collapseChildren(myData4);
     }
 
     @Override
