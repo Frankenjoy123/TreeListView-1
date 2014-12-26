@@ -6,25 +6,25 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ober.treelistview.R;
-import com.ober.treelistview.sample.data.MyData;
+import com.ober.treelistview.sample.data.SimpleData;
 import com.ober.treelistview.lib.BaseTreeViewAdapter;
 import com.ober.treelistview.lib.TreeStateManager;
 
 /**
  * Created by zlo on 2014/12/24.
  */
-public class MyTreeListAdapter extends BaseTreeViewAdapter<MyData> {
+public class MyTreeListAdapter extends BaseTreeViewAdapter<SimpleData> {
 
-    public MyTreeListAdapter(Context context, TreeStateManager<MyData> treeStateManager, int level) {
+    public MyTreeListAdapter(Context context, TreeStateManager<SimpleData> treeStateManager, int level) {
         super(context, treeStateManager, level);
     }
 
     @Override
-    protected View bindView(View rootView, MyData t, int level, boolean hasChildren, boolean isExpanded) {
+    protected View bindView(View rootView, SimpleData t, int level, boolean hasChildren, boolean isExpanded) {
         TreeLevelIndicator indicator = (TreeLevelIndicator)rootView.findViewById(R.id.indicator);
         TextView textView = (TextView)rootView.findViewById(R.id.tv);
 
-        MyData nextVisibleId = getManager().getNextVisible(t);
+        SimpleData nextVisibleId = getManager().getNextVisible(t);
 
         boolean showBottom = false;
         if(nextVisibleId != null) {
@@ -34,7 +34,7 @@ public class MyTreeListAdapter extends BaseTreeViewAdapter<MyData> {
         boolean showTop = getManager().getLevel(t) != 0;
 
         indicator.setUp(level, hasChildren, isExpanded, showTop, showBottom);
-        textView.setText("MyData num = " + t.num);
+        textView.setText("MyData s = " + t.s);
         return null;
     }
 
@@ -50,7 +50,7 @@ public class MyTreeListAdapter extends BaseTreeViewAdapter<MyData> {
     }
 
     @Override
-    protected void onItemClick(MyData t, boolean hasChild) {
+    protected void onItemClick(SimpleData t, boolean hasChild) {
 
     }
 

@@ -6,9 +6,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.ober.treelistview.R;
-import com.ober.treelistview.sample.data.MyData;
+import com.ober.treelistview.lib.TreeBuilderImpl;
+import com.ober.treelistview.sample.data.SimpleData;
 import com.ober.treelistview.lib.InMemoryTreeStateManager;
-import com.ober.treelistview.lib.TreeBuilder;
 import com.ober.treelistview.lib.TreeStateManager;
 import com.ober.treelistview.lib.TreeViewList;
 
@@ -19,17 +19,17 @@ public class MainActivity extends ActionBarActivity {
 
     private MyTreeListAdapter mAdapter;
 
-    private TreeStateManager<MyData> treeStateManager;
+    protected TreeStateManager<SimpleData> treeStateManager;
 
-    MyData myData1 = new MyData(1f);
-    MyData myData2 = new MyData(1.1f);
-    MyData myData3 = new MyData(1.2f);
-    MyData myData4 = new MyData(2f);
-    MyData myData5 = new MyData(2.1f);
-    MyData myData6 = new MyData(2.2f);
-    MyData myData7 = new MyData(2.21f);
+    SimpleData simpleData1 = new SimpleData("1");
+    SimpleData simpleData2 = new SimpleData("1.1");
+    SimpleData simpleData3 = new SimpleData("1.2");
+    SimpleData simpleData4 = new SimpleData("2");
+    SimpleData simpleData5 = new SimpleData("2.1");
+    SimpleData simpleData6 = new SimpleData("2.2");
+    SimpleData simpleData7 = new SimpleData("2.21");
 
-    MyData myData8 = new MyData(2.11f);
+    SimpleData simpleData8 = new SimpleData("2.11");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,22 +47,23 @@ public class MainActivity extends ActionBarActivity {
 
         mTreeList.setAdapter(mAdapter);
 
-        treeStateManager.addAfterChild(myData5, myData8, null);
+        treeStateManager.addAfterChild(simpleData5, simpleData8, null);
+
     }
 
     private void initTree() {
-        TreeBuilder<MyData> treeBuilder = new TreeBuilder<>(treeStateManager);
+        TreeBuilderImpl<SimpleData> treeBuilder = new TreeBuilderImpl<>(treeStateManager);
 
-        treeBuilder.sequentiallyAddNextNode(myData1, 0);
-        treeBuilder.sequentiallyAddNextNode(myData2, 1);
-        treeBuilder.sequentiallyAddNextNode(myData3, 1);
-        treeBuilder.sequentiallyAddNextNode(myData4, 0);
-        treeBuilder.sequentiallyAddNextNode(myData5, 1);
-        treeBuilder.sequentiallyAddNextNode(myData6, 1);
-        treeBuilder.sequentiallyAddNextNode(myData7, 2);
+        treeBuilder.sequentiallyAddNextNode(simpleData1, 0);
+        treeBuilder.sequentiallyAddNextNode(simpleData2, 1);
+        treeBuilder.sequentiallyAddNextNode(simpleData3, 1);
+        treeBuilder.sequentiallyAddNextNode(simpleData4, 0);
+        treeBuilder.sequentiallyAddNextNode(simpleData5, 1);
+        treeBuilder.sequentiallyAddNextNode(simpleData6, 1);
+        treeBuilder.sequentiallyAddNextNode(simpleData7, 2);
 
-        treeStateManager.collapseChildren(myData1);
-        treeStateManager.collapseChildren(myData4);
+        treeStateManager.collapseChildren(simpleData1);
+        treeStateManager.collapseChildren(simpleData4);
     }
 
     @Override
